@@ -74,21 +74,12 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="tb_kid">
+        <table tableName="tb_activity">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="tb_indexcategory">
+        <table tableName="tb_activitygroup">
             <property name="useActualColumnNames" value="false"/>
         </table>
-        <table tableName="tb_banner">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="tb_user_kid">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-
-
-
 
     </context>
 </generatorConfiguration>

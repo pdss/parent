@@ -42,9 +42,10 @@ public class KidServiceImpl extends BaseServiceImpl<TbKidMapper, TbKid, KidDTO> 
 
     @Override
     public MyResult deleteKid(int id) {
-        if(this.deleteById(id)){
+        if(baseMapper.deleteById(id)){
             return MyResult.ok("删除小孩成功");
         }
+//        if(this.deleteById(id)){
         return MyResult.error("删除小孩失败");
     }
 }

@@ -55,8 +55,8 @@ public class WXUserServiceImpl extends BaseServiceImpl<TbWxuserMapper, TbWxuser,
             }
             //查出新的user信息
             HashMap<String, Object> userMap = new HashMap<>();
-            userMap.put("userid", this.getOne(map).getUserid());
-            var newUser = this.getOne(userMap);
+            userMap.put("id", this.getOne(map).getUserid());
+            var newUser = userService.getOne(userMap);
             //加密生成token
             var token = String.format("YDSY:WXUSER_%s", newUser.getId());
             //把当期用户写入缓存,有效期20天
@@ -97,6 +97,7 @@ public class WXUserServiceImpl extends BaseServiceImpl<TbWxuserMapper, TbWxuser,
                 user.setIsdelete(false);
                 user.setAddtime(new Date());
                 user.setIdcardno("");
+                user.setBorndate("");
                 //查出新的wxUserid
                 var newWxuser = this.getOne(map);
                 user.setWxuserid(newWxuser.getId());

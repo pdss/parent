@@ -12,7 +12,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.web.bind.annotation.*;
 
-@ApiController("/api/wx")
+@ApiController("/api/wx/user")
 public class WXLoginController extends BaseController {
     @Reference(timeout = 30000)
     @Lazy
@@ -28,9 +28,10 @@ public class WXLoginController extends BaseController {
     //上传信息
     @PostMapping("/register")
     public MyResult register(@RequestBody UserDTO req) throws IllegalAccessException, UnAuthorizeException {
-        if(this.getUserInfo() != null){
-            req.setId(this.getUserId());
-            return this.wxUserService.bindUser(req);
+        var user = this.getUserInfo();
+        if(user != null){
+            req.setId(user.getId());
+            return wxUserService.bindUser(req);
         }
         return MyResult.error("请重新登录");
     }

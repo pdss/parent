@@ -16,4 +16,9 @@
     from tb_kid
     where userid = #{userid}
   </select>
+  <delete id="deleteById">
+    delete
+    from tb_kid
+    where id = #{id}
+  </delete>
 </mapper>

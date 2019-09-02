@@ -5,8 +5,6 @@ import javax.persistence.*;
 
 @Table(name = "tb_kid")
 public class TbKid extends BaseDBO {
-    @Id
-    private Long id;
 
     /**
      * username
@@ -18,7 +16,6 @@ public class TbKid extends BaseDBO {
      */
     private String borndate;
 
-    private Boolean isdelete;
 
     private Date addtime;
 

@@ -19,8 +19,9 @@ public class WXKidControlelr extends BaseController {
     private KidService kidService;
     @GetMapping("/kid")
     public MyResult getAllKidsByUserID() throws UnAuthorizeException {
-        if(this.getUserInfo() != null){
-            return this.badreq(kidService.getAllKids(this.getUserInfo().getId()));
+        var user = this.getUserInfo();
+        if(user != null){
+            return MyResult.ok(kidService.getAllKids(user.getId()));
         }
         return MyResult.error("请重新登录");
     }
@@ -38,7 +39,7 @@ public class WXKidControlelr extends BaseController {
         var id = this.getUserInfo();
         if(id != null){
             kid.setUserid(id.getId());
-            return kidService.addKid(kid);
+            return kidService.updateKid(kid);
         }
         return MyResult.error("请重新登录");
     }
