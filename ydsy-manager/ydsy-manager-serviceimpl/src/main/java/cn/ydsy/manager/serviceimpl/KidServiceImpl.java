@@ -1,4 +1,4 @@
-package cn.ydsy.manager.serviceimpl;
+/*package cn.ydsy.manager.serviceimpl;
 
 import cn.ydsy.common.model.MyResult;
 import cn.ydsy.manager.mapper.TbKidMapper;
@@ -48,4 +48,4 @@ public class KidServiceImpl extends BaseServiceImpl<TbKidMapper, TbKid, KidDTO> 
 //        if(this.deleteById(id)){
         return MyResult.error("删除小孩失败");
     }
-}
+}*/

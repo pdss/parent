@@ -6,6 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="parentid" property="parentid" jdbcType="BIGINT" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="sort" jdbcType="DOUBLE" property="sort" />
@@ -13,5 +14,8 @@
     <result column="Level" jdbcType="INTEGER" property="level" />
     <result column="IsDelete" jdbcType="BIT" property="isdelete" />
     <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="status" property="status" jdbcType="BIT" />
   </resultMap>
+
+
 </mapper>

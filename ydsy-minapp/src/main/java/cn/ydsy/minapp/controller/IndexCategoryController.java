@@ -29,4 +29,12 @@ public class IndexCategoryController extends BaseController {
         var list = this.indexCategoryService.list(null, orderBy, 1);
         return ok(list);
     }
+
+    @GetMapping("level")
+    public MyResult level(){
+//        String[] orderBy = {"sort"};
+
+        var list = this.indexCategoryService.select2Level();
+        return ok(list);
+    }
 }
