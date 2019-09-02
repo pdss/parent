@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ydsy.manager.mapper.TbUserMapper">
+  <resultMap id="BaseResultMap" type="cn.ydsy.manager.model.dbo.TbUser">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="Sex" jdbcType="INTEGER" property="sex" />
+    <result column="IsDelete" jdbcType="BIT" property="isdelete" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="IdCardNo" jdbcType="VARCHAR" property="idcardno" />
+    <result column="wxuserid" jdbcType="BIGINT" property="wxuserid" />
+    <result column="borndate" jdbcType="VARCHAR" property="borndate" />
+  </resultMap>
+
+</mapper>

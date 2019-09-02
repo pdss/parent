@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ydsy.manager.mapper.TbBannerMapper">
+  <resultMap id="BaseResultMap" type="cn.ydsy.manager.model.dbo.TbBanner">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="imageurl" jdbcType="VARCHAR" property="imageurl" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="sort" jdbcType="DOUBLE" property="sort" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="BannerType" jdbcType="INTEGER" property="bannertype" />
+    <result column="IsDelete" jdbcType="BIT" property="isdelete" />
+    <result column="AddTime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap>
+</mapper>
