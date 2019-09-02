@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ydsy.manager.mapper.TbActivitygroupMapper">
+  <resultMap id="BaseResultMap" type="cn.ydsy.manager.model.dbo.TbActivitygroup">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="SubTitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="Sort" jdbcType="DOUBLE" property="sort" />
+    <result column="isdelete" jdbcType="BIT" property="isdelete" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap>
+  <select id="getTopSix" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbCourse">
+    select *
+    from tb_activitygroup
+    limit 0,6
+  </select>
+</mapper>

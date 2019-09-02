@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ydsy.manager.mapper.TbActivityMapper">
+  <resultMap id="BaseResultMap" type="cn.ydsy.manager.model.dbo.TbActivity">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="SubTitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="Address" jdbcType="VARCHAR" property="address" />
+    <result column="WorkTime" jdbcType="VARCHAR" property="worktime" />
+    <result column="Price" jdbcType="DECIMAL" property="price" />
+    <result column="UserType" jdbcType="VARCHAR" property="usertype" />
+    <result column="isdelete" jdbcType="BIT" property="isdelete" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+    <result column="groupid" jdbcType="BIGINT" property="groupid" />
+    <result column="Images" jdbcType="LONGVARCHAR" property="images" />
+    <result column="Description" jdbcType="LONGVARCHAR" property="description" />
+    <result column="Required" jdbcType="LONGVARCHAR" property="required" />
+    <result column="Guide" jdbcType="LONGVARCHAR" property="guide" />
+  </resultMap>
+  <select id="getAllById" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbCourse">
+    select *
+    from tb_activity
+    where groupid = #{id}
+  </select>
+</mapper>
