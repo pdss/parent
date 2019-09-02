@@ -14,26 +14,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 @Service(interfaceClass = KidService.class)
 public class KidServiceImpl extends BaseServiceImpl<TbKidMapper, TbKid, KidDTO> implements KidService {
+
     @Autowired
     private TbKidMapper tbKidMapper;
+
     @Override
     public MyResult getAllKids(Long userid) {
-        List<TbKid> list = tbKidMapper.getAllKids(userid);
-        if (list.size() == 0){
-            return MyResult.error("当前没有小孩");
-        }
-        for (TbKid kid : list) {
-            kid.setAddtime(null);
-            kid.setIsdelete(null);
-        }
-        return MyResult.ok(list);
+//        List<TbKid> list = tbKidMapper.getAllKids(userid);
+//        if (list.size() == 0){
+//            return MyResult.error("当前没有小孩");
+//        }
+//        for (TbKid kid : list) {
+//            kid.setAddtime(null);
+//            kid.setIsdelete(null);
+//        }
+//        return MyResult.ok(list);
+        return null;
     }
 
     @Override
     public MyResult addKid(KidDTO kid) {
-        if (tbKidMapper.addKid(kid) != 0){
-            return MyResult.ok("修改成功");
-        }
-        return MyResult.error("修改失败");
+//        if (tbKidMapper.addKid(kid) != 0){
+//            return MyResult.ok("修改成功");
+//        }
+
+        return null;
     }
 }
