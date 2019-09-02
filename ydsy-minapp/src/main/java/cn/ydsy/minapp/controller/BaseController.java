@@ -7,6 +7,7 @@ import cn.ydsy.common.model.MyResult;
 import cn.ydsy.common.model.PageParameter;
 import cn.ydsy.common.utils.StringUtils;
 import cn.ydsy.common.utils.redis.RedisCommand;
+import cn.ydsy.manager.model.dto.UserDTO;
 import cn.ydsy.manager.model.dto.WxUserDTO;
 import cn.ydsy.manager.model.vo.BaseQueryVO;
 import com.github.binarywang.java.emoji.EmojiConverter;
@@ -88,7 +89,7 @@ public class BaseController {
         return userInfo.getId();
     }
 
-    protected WxUserDTO getUserInfo() throws UnAuthorizeException {
+    protected UserDTO getUserInfo() throws UnAuthorizeException {
         var token = this.getToken();
         if (StringUtils.isEmpty(token)) {
             return null;
@@ -98,7 +99,7 @@ public class BaseController {
             throw new UnAuthorizeException("Redis未找到用户信息,请重新登录");
         }
         this.refreshUserExpire();
-        var user = (WxUserDTO) cache;
+        var user = (UserDTO) cache;
 
         return user;
     }

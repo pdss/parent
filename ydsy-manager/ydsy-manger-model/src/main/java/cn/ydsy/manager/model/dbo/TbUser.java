@@ -18,9 +18,6 @@ public class TbUser extends BaseDBO {
     @Column(name = "Sex")
     private Integer sex;
 
-    @Column(name = "IsDelete")
-    private Boolean isdelete;
-
     /**
      * 身份证
      */

@@ -15,9 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -25,8 +27,10 @@ import java.util.concurrent.TimeUnit;
 @Service(interfaceClass = WXUserService.class)
 public class WXUserServiceImpl extends BaseServiceImpl<TbWxuserMapper, TbWxuser, WxUserDTO> implements WXUserService{
     @Autowired
+    @Lazy
     private WxMaService wxService;
     @Autowired
+    @Lazy
     private UserService userService;
 
     @Value("${ydsy.userRedisExprie}")
@@ -44,14 +48,19 @@ public class WXUserServiceImpl extends BaseServiceImpl<TbWxuserMapper, TbWxuser,
             var map = new HashMap<String, Object>();
             map.put("openid", openid);
             var wxUser = this.getOne(map);
-            //更新或添加用户
-            wxUser = this.registerNewUser(wxUser, openid);
-            //查出新的wxuser 入库和如redis
-            var newWxUser = this.getOne(map);
+            //更新或添加wx用户和用户信息 返回新的用户信息
+            var message = this.registerNewUser(wxUser, openid , map);
+            if(message == null){
+                return MyResult.error("信息上传异常");
+            }
+            //查出新的user信息
+            HashMap<String, Object> userMap = new HashMap<>();
+            userMap.put("userid", this.getOne(map).getUserid());
+            var newUser = this.getOne(userMap);
             //加密生成token
-            var token = String.format("YDSY:WXUSER_%s", newWxUser.getId());
+            var token = String.format("YDSY:WXUSER_%s", newUser.getId());
             //把当期用户写入缓存,有效期20天
-            this.redisService.set(token, newWxUser, userRedisExprie, TimeUnit.DAYS);
+            this.redisService.set(token, newUser, userRedisExprie, TimeUnit.DAYS);
             return MyResult.ok(token);
         } catch (WxErrorException e) {
             log.info("获取微信信息失败:{}", e.getMessage());
@@ -61,22 +70,50 @@ public class WXUserServiceImpl extends BaseServiceImpl<TbWxuserMapper, TbWxuser,
 
     @Override
     public MyResult bindUser(UserDTO req) {
-        userService.add(req);
-        return MyResult.ok("信息上传成功");
+        if(userService.updateById(req)){
+            return MyResult.ok("信息上传成功");
+        }
+        return MyResult.error("信息上传失败");
     }
 
-    private WxUserDTO registerNewUser(WxUserDTO wxuser, String openid) {
+    private String registerNewUser(WxUserDTO wxuser, String openid , Map<String,Object> map) {
         if (wxuser == null) {
-            wxuser = new WxUserDTO();
-            wxuser.setOpenid(openid);
-            wxuser.setUnionid("");
-            wxuser.setAddtime(new Date());
-            wxuser.setIsdelete(false);
-            wxuser.setUserid(0L);
-            wxuser.setNickname("");
-            wxuser.setAvatarurl("");
-            this.add(wxuser);
+            var res = this.transactionUtils.transact((a) -> {
+                //保存wxuser
+                WxUserDTO wxUser = new WxUserDTO();
+                wxUser.setOpenid(openid);
+                wxUser.setUnionid("");
+                wxUser.setAddtime(new Date());
+                wxUser.setIsdelete(false);
+                wxUser.setUserid(0L);
+                wxUser.setNickname("");
+                wxUser.setAvatarurl("");
+                this.add(wxUser);
+                //查出wxuser.id 新建user把wxuser.id保存到user
+                UserDTO user = new UserDTO();
+                user.setUsername("");
+                user.setPhone("");
+                user.setSex(0);
+                user.setIsdelete(false);
+                user.setAddtime(new Date());
+                user.setIdcardno("");
+                //查出新的wxUserid
+                var newWxuser = this.getOne(map);
+                user.setWxuserid(newWxuser.getId());
+                userService.add(user);
+                //查出user.id保存入wxUser
+                HashMap<String, Object> userMap = new HashMap<>();
+                userMap.put("wxuserid",newWxuser.getId());
+                var newUser = userService.getOne(userMap);
+                newWxuser.setUserid(newUser.getId());
+                this.updateById(newWxuser);
+            });
+            if (res) {
+                return "ok";
+            } else {
+                return null;
+            }
         }
-        return wxuser;
+        return "ok";
     }
 }
