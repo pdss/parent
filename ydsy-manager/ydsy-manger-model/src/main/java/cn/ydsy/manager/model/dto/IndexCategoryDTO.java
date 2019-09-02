@@ -8,6 +8,9 @@ import java.util.List;
 
 @Data
 public class IndexCategoryDTO extends TbIndexcategory implements BaseDTO {
-    private List<IndexCategoryDTO> SubCategorys;
-}
 
+
+    private List<IndexCategoryDTO> SubCategorys;
+
+
+}

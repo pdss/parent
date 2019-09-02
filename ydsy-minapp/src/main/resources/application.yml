@@ -1,11 +1,11 @@
 #dubbo conf
 dubbo:
   application:
-    name: ydsy-manager-web
+    name: ydsy-manager-mp
   registry:
     address: zookeeper://127.0.0.1:2181
   consumer:
-    timeout: 5000
+    timeout: 15000
 
 #picture upload conf
 spring:

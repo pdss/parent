@@ -8,6 +8,7 @@ import tk.mybatis.mapper.entity.Example;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface BaseService<T extends BaseDTO, M extends tk.mybatis.mapper.common.Mapper<V>, V extends BaseDBO> {
 
@@ -65,6 +66,8 @@ public interface BaseService<T extends BaseDTO, M extends tk.mybatis.mapper.comm
     cn.ydsy.common.model.Pagination<T> query(cn.ydsy.common.model.PageParameter page, Map<String, Object> filters, String[] sorts, Integer[] isAsc) throws Exception;
 
     List<T> query(Map<String, Object> filters, String[] sorts, Integer[] isAsc);
+
+    boolean update(T entity, Set<String> updateColumns);
 
 
 }

@@ -11,4 +11,9 @@
     <result column="isdelete" jdbcType="BIT" property="isdelete" />
     <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
   </resultMap>
+  <select id="getAllKids" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbKid">
+    select *
+    from tb_kid
+    where userid = #{userid}
+  </select>
 </mapper>

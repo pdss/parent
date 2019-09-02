@@ -14,26 +14,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 @Service(interfaceClass = KidService.class)
 public class KidServiceImpl extends BaseServiceImpl<TbKidMapper, TbKid, KidDTO> implements KidService {
-    @Autowired
-    private TbKidMapper tbKidMapper;
+
     @Override
-    public MyResult getAllKids(Long userid) {
-        List<TbKid> list = tbKidMapper.getAllKids(userid);
+    public List<KidDTO> getAllKids(Long userid) {
+        List<KidDTO> list = baseMapper.getAllKids(userid);
         if (list.size() == 0){
-            return MyResult.error("当前没有小孩");
+            return null;
         }
-        for (TbKid kid : list) {
-            kid.setAddtime(null);
-            kid.setIsdelete(null);
-        }
-        return MyResult.ok(list);
+        return list;
     }
 
     @Override
     public MyResult addKid(KidDTO kid) {
-        if (tbKidMapper.addKid(kid) != 0){
-            return MyResult.ok("修改成功");
+        if (this.add(kid)){
+            return MyResult.ok("上传小孩信息成功");
         }
-        return MyResult.error("修改失败");
+        return MyResult.error("上传小孩信息失败");
+    }
+
+    @Override
+    public MyResult updateKid(KidDTO kid) {
+        if(this.updateById(kid)){
+            return MyResult.ok("更新小孩信息成功");
+        }
+        return MyResult.error("更新小孩信息失败");
+    }
+
+    @Override
+    public MyResult deleteKid(int id) {
+        if(this.deleteById(id)){
+            return MyResult.ok("删除小孩成功");
+        }
+        return MyResult.error("删除小孩失败");
     }
 }*/

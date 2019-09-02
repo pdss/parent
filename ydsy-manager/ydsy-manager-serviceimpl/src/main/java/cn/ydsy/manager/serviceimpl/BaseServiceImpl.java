@@ -30,6 +30,7 @@ import tk.mybatis.mapper.util.Sqls;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -42,7 +43,7 @@ import java.util.stream.Collectors;
  * @param <DTO>
  */
 @Slf4j
-public class BaseServiceImpl<MAPPER extends tk.mybatis.mapper.common.Mapper<DBO>, DBO extends BaseDBO, DTO extends BaseDTO>  implements BaseService<DTO, MAPPER, DBO> {
+public class BaseServiceImpl<MAPPER extends tk.mybatis.mapper.common.Mapper<DBO>, DBO extends BaseDBO, DTO extends BaseDTO> implements BaseService<DTO, MAPPER, DBO> {
 
     @Value("${ydsy.salt}")
     protected String salt;
@@ -291,10 +292,25 @@ public class BaseServiceImpl<MAPPER extends tk.mybatis.mapper.common.Mapper<DBO>
     }
 
     @Override
-    public boolean update(DTO entity, Map<String, Object> columnMap) {
-        var example = this.columnsMapToSqlBuilder(columnMap);
+    public boolean update(DTO entity, Map<String, Object> where) {
+        var example = this.columnsMapToSqlBuilder(where);
         var dbo = this.beanMap(entity, this.currentDBOClass());
         return retBool(this.baseMapper.updateByExample(dbo, example.build()));
+    }
+
+    public boolean update(DTO entity, Set<String> columns) {
+        for (Field field : entity.getClass().getDeclaredFields()) {
+            if (!columns.contains(field.getName())) {
+                try {
+                    field.set(entity, null);
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        var dbo = this.beanMap(entity, this.currentDBOClass());
+        return this.baseMapper.updateByPrimaryKeySelective(dbo) > 0;
+
     }
 
     @Override
@@ -343,7 +359,7 @@ public class BaseServiceImpl<MAPPER extends tk.mybatis.mapper.common.Mapper<DBO>
                 .builder(this.currentDBOClass())
                 .where(Sqls.custom().andIn("id", ids).andEqualTo("isdelete", 0))
                 .build();
-        example.setOrderByClause("FIELD(`id`,'" + String.join("','", ids.stream().map(e->e.toString()).collect(Collectors.toList())) + "')");
+        example.setOrderByClause("FIELD(`id`,'" + String.join("','", ids.stream().map(e -> e.toString()).collect(Collectors.toList())) + "')");
         var dbos = this.baseMapper.selectByExample(example);
         return this.beanListMap(dbos, this.currentDTOClass());
     }
