@@ -1,4 +1,4 @@
-package cn.ydsy.manager.serviceimpl;
+/*package cn.ydsy.manager.serviceimpl;
 
 import cn.ydsy.common.model.MyResult;
 import cn.ydsy.manager.mapper.TbKidMapper;
@@ -36,4 +36,4 @@ public class KidServiceImpl extends BaseServiceImpl<TbKidMapper, TbKid, KidDTO> 
         }
         return MyResult.error("修改失败");
     }
-}
+}*/

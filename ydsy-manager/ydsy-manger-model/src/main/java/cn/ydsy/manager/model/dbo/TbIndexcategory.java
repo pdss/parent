@@ -9,6 +9,8 @@ public class TbIndexcategory extends BaseDBO {
     @Column(name = "Id")
     private Long id;
 
+    private Long parentid;
+
     private String icon;
 
     private String title;
@@ -26,6 +28,17 @@ public class TbIndexcategory extends BaseDBO {
     @Column(name = "AddTime")
     private Date addtime;
 
+    private Boolean status;
+
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
     /**
      * @return Id
      */
@@ -38,6 +51,15 @@ public class TbIndexcategory extends BaseDBO {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+
+    public Long getParentid() {
+        return parentid;
+    }
+
+    public void setParentid(Long parentid) {
+        this.parentid = parentid;
     }
 
     /**

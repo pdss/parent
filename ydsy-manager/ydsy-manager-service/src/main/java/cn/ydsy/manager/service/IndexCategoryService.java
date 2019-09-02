@@ -7,5 +7,10 @@ import cn.ydsy.manager.model.dbo.TbIndexcategory;
 import cn.ydsy.manager.model.dto.BannerDTO;
 import cn.ydsy.manager.model.dto.IndexCategoryDTO;
 
+import java.util.List;
+
 public interface IndexCategoryService extends BaseService<IndexCategoryDTO, TbIndexcategoryMapper, TbIndexcategory> {
+
+    List<IndexCategoryDTO> select2Level();
+
 }
