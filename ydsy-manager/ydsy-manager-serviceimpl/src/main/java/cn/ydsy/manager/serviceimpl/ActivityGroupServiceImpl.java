@@ -13,6 +13,8 @@ import java.util.List;
 public class ActivityGroupServiceImpl extends BaseServiceImpl<TbActivitygroupMapper, TbActivitygroup, ActivityGroupDTO> implements ActivityGroupService {
     @Override
     public List<ActivityGroupDTO> getTopSix() {
-        return this.baseMapper.getTopSix();
+        var test = this.baseMapper.getTopSix();
+        System.out.println(test);
+        return test;
     }
 }

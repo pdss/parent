@@ -1,15 +1,11 @@
-/*package cn.ydsy.manager.serviceimpl;
+package cn.ydsy.manager.serviceimpl;
 
 import cn.ydsy.common.model.MyResult;
 import cn.ydsy.manager.mapper.TbKidMapper;
-import cn.ydsy.manager.mapper.TbWxuserMapper;
 import cn.ydsy.manager.model.dbo.TbKid;
-import cn.ydsy.manager.model.dbo.TbWxuser;
 import cn.ydsy.manager.model.dto.KidDTO;
-import cn.ydsy.manager.model.dto.WxUserDTO;
 import cn.ydsy.manager.service.KidService;
 import com.alibaba.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 @Service(interfaceClass = KidService.class)
@@ -41,11 +37,10 @@ public class KidServiceImpl extends BaseServiceImpl<TbKidMapper, TbKid, KidDTO> 
     }
 
     @Override
-    public MyResult deleteKid(int id) {
-        if(baseMapper.deleteById(id)){
+    public MyResult deleteKid(Long id) {
+        if(this.baseMapper.deleteById(id)){
             return MyResult.ok("删除小孩成功");
         }
-//        if(this.deleteById(id)){
         return MyResult.error("删除小孩失败");
     }
-}*/
+}

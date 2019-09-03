@@ -12,7 +12,7 @@
     <result column="isdelete" jdbcType="BIT" property="isdelete" />
     <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
   </resultMap>
-  <select id="getTopSix" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbCourse">
+  <select id="getTopSix" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbActivitygroup">
     select *
     from tb_activitygroup
     limit 0,6

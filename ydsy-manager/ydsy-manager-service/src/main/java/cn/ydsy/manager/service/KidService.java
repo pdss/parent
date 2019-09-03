@@ -18,5 +18,5 @@ public interface KidService extends BaseService<KidDTO, TbKidMapper, TbKid> {
     //修改孩子
     public MyResult updateKid(KidDTO kid);
     //删除孩子
-    public MyResult deleteKid(int id);
+    public MyResult deleteKid(Long id);
 }

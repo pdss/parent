@@ -20,7 +20,7 @@
     <result column="Required" jdbcType="LONGVARCHAR" property="required" />
     <result column="Guide" jdbcType="LONGVARCHAR" property="guide" />
   </resultMap>
-  <select id="getAllById" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbCourse">
+  <select id="getAllById" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbActivity">
     select *
     from tb_activity
     where groupid = #{id}

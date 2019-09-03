@@ -44,7 +44,7 @@ public class WXKidControlelr extends BaseController {
         return MyResult.error("请重新登录");
     }
     @DeleteMapping("/kid")
-    public MyResult deleteKid(@PathParam("kidId") int kidId) throws UnAuthorizeException {
+    public MyResult deleteKid(@PathParam("kidId") long kidId) throws UnAuthorizeException {
         var id = this.getUserInfo();
         if(id != null){
             return kidService.deleteKid(kidId);

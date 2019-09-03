@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface TbKidMapper extends Mapper<TbKid> {
     List<KidDTO> getAllKids(Long userid);
-    Boolean deleteById(int id);
+    Boolean deleteById(Long id);
 }

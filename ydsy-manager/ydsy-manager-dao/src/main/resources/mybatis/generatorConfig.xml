@@ -74,10 +74,7 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="tb_activity">
-            <property name="useActualColumnNames" value="false"/>
-        </table>
-        <table tableName="tb_activitygroup">
+        <table tableName="tb_usercard">
             <property name="useActualColumnNames" value="false"/>
         </table>
 
