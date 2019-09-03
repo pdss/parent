@@ -31,7 +31,7 @@ public class VipCardController extends BaseController {
     public MyResult getOldCards() throws UnAuthorizeException {
         var user = this.getUserInfo();
         if(user != null){
-            var list = usercardService.getMyCards(user.getId());
+            var list = usercardService.getOldCards(user.getId());
             return ok(list);
         }
         return MyResult.error("请重新登录");

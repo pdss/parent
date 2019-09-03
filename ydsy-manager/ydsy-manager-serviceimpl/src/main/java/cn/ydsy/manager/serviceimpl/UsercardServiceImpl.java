@@ -10,29 +10,24 @@ import cn.ydsy.manager.service.UserService;
 import cn.ydsy.manager.service.UsercardService;
 import com.alibaba.dubbo.config.annotation.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
+
 @Service(interfaceClass = UsercardService.class)
 public class UsercardServiceImpl extends BaseServiceImpl<TbUsercardMapper, TbUsercard, UsercardDTO> implements UsercardService {
 
     @Override
     public List<UsercardDTO> getMyCards(Long id) {
         var list = this.baseMapper.getMyCards(id);
-        for (UsercardDTO user:list) {
-            if(user.getAddtime().compareTo(user.getOvertime()) >= 0){
-                list.remove(user);
-            }
-        }
         return list;
     }
 
     @Override
     public List<UsercardDTO> getOldCards(Long id) {
-        var list = this.baseMapper.getMyCards(id);
-        for (UsercardDTO user:list) {
-            if(user.getAddtime().compareTo(user.getOvertime()) < 0){
-                list.remove(user);
-            }
-        }
+        var list = this.baseMapper.getOldCards(id);
         return list;
     }
 }
