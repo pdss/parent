@@ -23,4 +23,14 @@ public class ActivityServiceImpl extends BaseServiceImpl<TbActivityMapper, TbAct
         return this.mapPageInfo(pageInfo,ActivityDTO.class);
 
     }
+
+    @Override
+    public List<String> getAllImage() {
+        return this.baseMapper.getAllImage();
+    }
+
+    @Override
+    public List<ActivityDTO> getTopSix() {
+        return this.baseMapper.getTopSix();
+    }
 }

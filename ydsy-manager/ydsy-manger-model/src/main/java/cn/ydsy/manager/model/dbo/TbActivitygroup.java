@@ -19,6 +19,18 @@ public class TbActivitygroup extends BaseDBO {
 
     private Date addtime;
 
+
+    @Column(name = "activitytype")
+    private int activitytype;
+
+    public int getActivitytype() {
+        return activitytype;
+    }
+
+    public void setActivitytype(int activitytype) {
+        this.activitytype = activitytype;
+    }
+
     /**
      * @return id
      */

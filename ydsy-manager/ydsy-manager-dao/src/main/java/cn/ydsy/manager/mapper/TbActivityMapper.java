@@ -9,4 +9,8 @@ import java.util.List;
 
 public interface TbActivityMapper extends Mapper<TbActivity> {
     List<ActivityDTO> getAllById(int id);
+    //所有图片
+    List<String> getAllImage();
+    //得到前六条activity
+    List<ActivityDTO> getTopSix();
 }

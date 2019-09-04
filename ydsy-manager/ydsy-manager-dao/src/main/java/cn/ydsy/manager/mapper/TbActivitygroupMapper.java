@@ -8,5 +8,5 @@ import tk.mybatis.mapper.common.Mapper;
 import java.util.List;
 
 public interface TbActivitygroupMapper extends Mapper<TbActivitygroup> {
-    List<ActivityGroupDTO> getTopSix();
+    List<ActivityGroupDTO> getAllGroup();
 }

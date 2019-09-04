@@ -23,7 +23,7 @@ public class WXActivityController extends BaseController {
 
     @GetMapping("/hotpage")
     public MyResult getActivityGroup(){
-        return MyResult.ok(activityGroupService.getTopSix());
+        return MyResult.ok(activityGroupService.getAllGroup());
     }
 
     @GetMapping("/hotdetails")

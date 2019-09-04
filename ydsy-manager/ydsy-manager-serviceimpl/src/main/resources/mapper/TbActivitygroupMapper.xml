@@ -12,9 +12,18 @@
     <result column="isdelete" jdbcType="BIT" property="isdelete" />
     <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
   </resultMap>
-  <select id="getTopSix" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbActivitygroup">
+
+  <resultMap id="AllGroupWithSubItems_Map" type="cn.ydsy.manager.model.dto.ActivityGroupDTO">
+     <collection property="activitys" ofType="cn.ydsy.manager.model.dto.ActivityDTO" column="id" select="ActivitysByGroupId_Map">
+     </collection>
+  </resultMap>
+
+  <select id="ActivitysByGroupId_Map" resultType="cn.ydsy.manager.model.dto.ActivityDTO">
+    select * from tb_activity where groupid=#{id}
+  </select>
+
+  <select id="getAllGroup" resultMap="AllGroupWithSubItems_Map">
     select *
     from tb_activitygroup
-    limit 0,6
   </select>
 </mapper>

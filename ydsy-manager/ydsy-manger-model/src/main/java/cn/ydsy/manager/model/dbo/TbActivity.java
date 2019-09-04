@@ -41,6 +41,17 @@ public class TbActivity extends BaseDBO {
     @Column(name = "Guide")
     private String guide;
 
+    @Column(name = "activitytype")
+    private int activitytype;
+
+    public int getActivitytype() {
+        return activitytype;
+    }
+
+    public void setActivitytype(int activitytype) {
+        this.activitytype = activitytype;
+    }
+
     /**
      * @return id
      */

@@ -25,4 +25,15 @@
     from tb_activity
     where groupid = #{id}
   </select>
+  <select id="getAllImage" parameterType="java.util.List" resultType="String">
+    select images
+    from tb_activity
+  </select>
+
+  <select id="getTopSix" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbActivitygroup">
+    select *
+    from tb_activity
+    limit 0,6
+  </select>
+
 </mapper>
