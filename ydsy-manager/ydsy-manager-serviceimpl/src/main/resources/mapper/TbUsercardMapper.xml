@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ydsy.manager.mapper.TbUsercardMapper">
+  <resultMap id="BaseResultMap" type="cn.ydsy.manager.model.dbo.TbUsercard">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="userid" jdbcType="BIGINT" property="userid" />
+    <result column="cardid" jdbcType="BIGINT" property="cardid" />
+    <result column="buytime" jdbcType="TIMESTAMP" property="buytime" />
+    <result column="overtime" jdbcType="TIMESTAMP" property="overtime" />
+    <result column="cardtype" jdbcType="INTEGER" property="cardtype" />
+    <result column="cardno" jdbcType="VARCHAR" property="cardno" />
+    <result column="isdelete" jdbcType="BIT" property="isdelete" />
+    <result column="addtime" jdbcType="TIMESTAMP" property="addtime" />
+  </resultMap>
+  <select id="getMyCards" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbUsercard">
+        select *
+        from tb_usercard
+        where userid = #{id}
+        and isdelete = 0
+        and overtime > addtime
+  </select>
+    <select id="getOldCards" parameterType="java.util.List" resultType="cn.ydsy.manager.model.dbo.TbUsercard">
+        select *
+        from tb_usercard
+        where userid = #{id}
+        and isdelete = 0
+        and addtime > overtime
+  </select>
+</mapper>
