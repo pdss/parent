@@ -74,7 +74,10 @@
                              type="XMLMAPPER"/>
 
 
-        <table tableName="tb_usercard">
+        <table tableName="tb_city">
+            <property name="useActualColumnNames" value="false"/>
+        </table>
+        <table tableName="tb_area">
             <property name="useActualColumnNames" value="false"/>
         </table>
 
